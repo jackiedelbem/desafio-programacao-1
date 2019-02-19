@@ -1,0 +1,47 @@
+<nav class="light-blue lighten-1" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Teste prático - Jacqueline Delbem</a>
+</nav>
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <%= flash[:notice] %>
+    <div>
+      <h4>Importar arquivo</h4>
+
+      <%= form_tag import_path_url, multipart: true do %>
+        <%= file_field :file_import, :file, class: 'file-path validate',  accept: '.tab' %>
+        <%= submit_tag "Importar", class: 'btn light-blue' %>
+      <% end %>   
+    </div>
+
+    <h6>Total de vendas: <%= number_to_currency(@sum, unit: "R$", separator: ",", delimiter: "") %></h4>
+
+    <h4>Vendas</h4>
+    <table class="striped">
+        <thead>
+          <tr>
+              <th>Purchaser Name</th>
+              <th>Item Description</th>
+              <th>Item Price</th>
+              <th>Purchase Count</th>
+              <th>Merchant Address</th>
+              <th>Merchant Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @sales.each do|sale| %>
+            <tr>
+              <td><%= sale.purchaser_name %></td>
+              <td><%= sale.item_description %></td>
+              <td><%= number_to_currency(sale.item_price, unit: "R$", separator: ",", delimiter: "") %></td>
+              <td><%= sale.purchase_count %></td>
+              <td><%= sale.merchant_address %></td>
+              <td><%= sale.merchant_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
+
+
