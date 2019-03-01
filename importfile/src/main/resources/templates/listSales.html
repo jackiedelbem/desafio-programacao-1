@@ -1,0 +1,52 @@
+<html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sale</title>
+</head>
+<body>
+	<h2>Lista de Vendas Importadas</h2>
+	<div th:unless="${#lists.isEmpty(sales)}">
+		<table>
+			<tr>
+			  <th>Purchaser Name</th>
+              <th>Item Description</th>
+              <th>Item Price</th>
+              <th>Purchase Count</th>
+              <th>Merchant Address</th>
+              <th>Merchant Name</th>
+			</tr>
+			
+			<tr th:each="sale : ${sales}">
+				<td th:text="${sale.purchaserName}"></td>
+				<td th:text="${sale.itemDescription}"></td>
+				<td th:text="${sale.itemPrice}"></td>
+				<td th:text="${sale.purchaseCount}"></td>
+				<td th:text="${sale.merchantAddress}"></td>
+				<td th:text="${sale.merchantName}"></td>
+			</tr>
+			
+      
+		</table>
+	     
+	</div>
+	<div th:if="${#lists.isEmpty(sales)}">
+	      <p>Nenhuma venda importada</p>
+	</div>
+	<hr />
+	
+	<h3>Total de Vendas</h3>
+	<span th:text="${total}">Total</span> 
+
+	
+	<h3>Importe um arquivo:</h3>
+    <form method="POST" enctype="multipart/form-data" action="/">
+		<table>
+			<tr><td>File to upload:</td><td><input type="file" name="file" accept=".tab"/></td></tr>
+			<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+		</table>
+	</form>
+</body>
+</html>
